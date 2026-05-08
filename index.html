@@ -595,22 +595,7 @@ footer {
 }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  nav { padding: 1.2rem 1.5rem; }
-  .nav-links { display: none; }
-  section { padding: 5.5rem 1.5rem; }
-  #stats { grid-template-columns: 1fr 1fr; padding: 0 1.5rem; }
-  .stat-cell:nth-child(2) { border-right: none; }
-  .info-grid { grid-template-columns: 1fr; gap: 3rem; }
-  #location { grid-template-columns: 1fr; padding: 5.5rem 1.5rem; gap: 3rem; }
-  footer { flex-direction: column; text-align: center; }
-  #gallery { padding: 5.5rem 1.5rem; }
-  .gallery-grid { columns: 2 140px; }
-  .video-item { flex: 0 0 min(260px, 78vw); }
-  .video-item video { height: 380px; }
-  #videos .section-header { padding: 0 1.5rem; }
-  .video-strip { padding: 0 1.5rem 1.2rem; }
-}
+
 </style>
 </head>
 <body>
@@ -971,6 +956,12 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
 });
 </script>
+<script>
+window.history.scrollRestoration = "manual";
 
+window.onload = () => {
+  window.scrollTo(0, 0);
+};
+</script>
 </body>
 </html>
