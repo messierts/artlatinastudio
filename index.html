@@ -595,7 +595,22 @@ footer {
 }
 
 /* ── RESPONSIVE ── */
-
+@media (max-width: 900px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 5.5rem 1.5rem; }
+  #stats { grid-template-columns: 1fr 1fr; padding: 0 1.5rem; }
+  .stat-cell:nth-child(2) { border-right: none; }
+  .info-grid { grid-template-columns: 1fr; gap: 3rem; }
+  #location { grid-template-columns: 1fr; padding: 5.5rem 1.5rem; gap: 3rem; }
+  footer { flex-direction: column; text-align: center; }
+  #gallery { padding: 5.5rem 1.5rem; }
+  .gallery-grid { columns: 2 140px; }
+  .video-item { flex: 0 0 min(260px, 78vw); }
+  .video-item video { height: 380px; }
+  #videos .section-header { padding: 0 1.5rem; }
+  .video-strip { padding: 0 1.5rem 1.2rem; }
+}
 </style>
 </head>
 <body>
@@ -920,6 +935,16 @@ footer {
 </div>
 
 <script>
+// Força início no topo ao abrir a página (especialmente no celular)
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', function() {
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+});
+</script>
+
+<script>
 const galleryImages = [
   'IMGJPEG.jpeg',
   'IMG (1).png','IMG (2).png','IMG (3).png','IMG (4).png',
@@ -956,12 +981,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
 });
 </script>
-<script>
-window.history.scrollRestoration = "manual";
 
-window.onload = () => {
-  window.scrollTo(0, 0);
-};
-</script>
 </body>
 </html>
