@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>if('scrollRestoration'in history){history.scrollRestoration='manual';}if(window.location.hash){history.replaceState(null,'',window.location.pathname+window.location.search);}window.scrollTo(0,0);</script>
 <title>Art Latina Studio | Tattoo & Piercing — Nova Iguaçu</title>
 <link rel="icon" type="image/png" href="rosaguia.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,6 +35,7 @@
 }
 
 html { scroll-behavior: smooth; }
+html.no-smooth { scroll-behavior: auto; }
 body {
   background: var(--bg-deepest);
   color: var(--cream);
@@ -935,13 +937,43 @@ footer {
 </div>
 
 <script>
-// Força início no topo ao abrir a página (especialmente no celular)
-if ('scrollRestoration' in history) {
-  history.scrollRestoration = 'manual';
-}
-window.addEventListener('load', function() {
-  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-});
+(function() {
+  // 1. Desativa restauração automática de scroll do browser
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // 2. Remove qualquer hash da URL para evitar que o browser role até um anchor
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+
+  // 3. Desativa smooth scroll temporariamente para o reset não ser interceptado
+  document.documentElement.classList.add('no-smooth');
+
+  // 4. Rola para o topo imediatamente (antes de qualquer render)
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body && (document.body.scrollTop = 0);
+
+  // 5. Reaplica no DOMContentLoaded (captura casos de restauração tardia)
+  document.addEventListener('DOMContentLoaded', function() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+
+  // 6. Reaplica no load completo e reativa smooth scroll
+  window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    // Reativa smooth scroll após o reset
+    setTimeout(function() {
+      document.documentElement.classList.remove('no-smooth');
+    }, 100);
+  });
+})();
 </script>
 
 <script>
